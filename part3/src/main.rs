@@ -2,6 +2,7 @@ enum CitySize {
     Town,       // approximate residents: 1_000
     City,       // approximate residents: 10_000
     Metropolis, // approximate residents: 1_000_000
+    Area {residents: u64},
 }
 
 struct City {
@@ -11,7 +12,7 @@ struct City {
 }
 
 impl City {
-    fn new(city_size: CitySize, is_coastal: bool) -> City {
+    fn new(city_size: CitySize, is_coastal: bool) -> Self {
         let (description, residents) = match city_size {
             CitySize::Town => {
                 let residents = 1_000;
@@ -45,9 +46,18 @@ impl City {
                     residents,
                 )
             }
+            CitySize::Area {residents} => {
+                (
+                    format!(
+                        "an *area* of approximately {} residents",
+                        residents
+                    ),
+                    residents
+                )
+            }
         };
 
-        City {
+        Self {
             description,
             residents,
             is_coastal,
@@ -56,7 +66,7 @@ impl City {
 }
 
 fn main() {
-    let rustville = City::new(CitySize::Metropolis, true);
+    let rustville = City::new(CitySize::Area {residents: 100_000_000}, true);
 
     println!("This city is {}", rustville.description);
     println!("City is coastal: {}", rustville.is_coastal);
