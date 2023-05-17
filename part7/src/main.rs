@@ -55,7 +55,7 @@ fn average(numbers: &Vec<i64>) -> i64 {
     sum(&numbers) / length
 }
 
-fn first_three<'a, 'b>(numbers1: &'a Vec<i64>, numbers2: &'b Vec<i64>) -> (&'a[i64], &'b[i64]) {
+fn first_three<'a>(numbers1: &'a Vec<i64>, numbers2: &'a Vec<i64>) -> (&'a[i64], &'a[i64]) {
     // 👉 TODO Return two slices, one containing the first 3 elements in
     //    numbers1, and the other containing the first 3 elements in numbers2.
     //
